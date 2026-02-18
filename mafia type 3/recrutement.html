@@ -1,0 +1,1767 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAFIA FAMIGLIA – Recrutement</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Playfair+Display:ital@0;1&family=Oswald:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bleu-nuit: #152226;
+            --gris-anthracite: #1A1D1E;
+            --or-vieilli: #C39A5B;
+            --jaune-pale: #F9D689;
+            --cyan-brume: #4A6B70;
+            --rouge-sang: #B22222;
+            --blanc-pur: #FFFFFF;
+            --erreur-rouge: #FF4444;
+            --succes-vert: #2E7D32;
+            --couleur-hommes: #C39A5B;
+            --couleur-travailleurs: #4A6B70;
+        }
+
+        body {
+            font-family: 'Playfair Display', serif;
+            background-color: var(--bleu-nuit);
+            color: var(--blanc-pur);
+            min-height: 100vh;
+            padding: 1.5rem;
+            background: linear-gradient(rgba(21, 34, 38, 0.85), rgba(21, 34, 38, 0.95)), 
+                        url('https://i.postimg.cc/141VQQph/Ultra-realistic-cinematic-poster-of-1920s-mafia-city-street-at-night-vintage-gangster-atmosphere-d.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        /* ===== TOP BAR AVEC LOGO CENTRÉ ===== */
+        .top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding: 0.5rem 1.5rem;
+            background: rgba(26, 29, 30, 0.8);
+            backdrop-filter: blur(8px);
+            border-radius: 50px;
+            border: 1px solid var(--or-vieilli);
+            position: relative;
+        }
+
+        .logo-small {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .logo-small-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--or-vieilli);
+            overflow: hidden;
+        }
+
+        .logo-small-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .logo-small-text {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--blanc-pur);
+            letter-spacing: 2px;
+        }
+
+        .logo-small-text .family {
+            color: var(--jaune-pale);
+        }
+
+        .right-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-left: auto;
+        }
+
+        .music-btn {
+            background: transparent;
+            border: 2px solid var(--or-vieilli);
+            color: var(--jaune-pale);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+            padding: 0;
+        }
+
+        .music-btn:hover {
+            background: var(--or-vieilli);
+            color: var(--gris-anthracite);
+            transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(195, 154, 91, 0.5);
+        }
+
+        .music-btn.playing {
+            color: var(--or-vieilli);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(195, 154, 91, 0.5); }
+            70% { box-shadow: 0 0 0 8px rgba(195, 154, 91, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(195, 154, 91, 0); }
+        }
+
+        .lang-switch {
+            display: flex;
+            gap: 0.3rem;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 2px solid var(--or-vieilli);
+            border-radius: 50px;
+            padding: 0.2rem 0.6rem;
+            color: var(--blanc-pur);
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            gap: 0.2rem;
+        }
+
+        .lang-btn img {
+            width: 18px;
+            height: 12px;
+            border-radius: 2px;
+            object-fit: cover;
+        }
+
+        .lang-btn.active {
+            background: var(--or-vieilli);
+            color: var(--gris-anthracite);
+            border-color: var(--or-vieilli);
+        }
+
+        /* ===== MENU ===== */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.6rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .menu-item {
+            background: rgba(26, 29, 30, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--or-vieilli);
+            border-radius: 20px;
+            padding: 0.8rem 0.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--jaune-pale);
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.2s;
+            text-align: center;
+        }
+
+        .menu-item:hover {
+            background: var(--or-vieilli);
+            color: var(--gris-anthracite);
+            border-color: var(--jaune-pale);
+            transform: translateY(-2px);
+        }
+
+        .menu-item.active {
+            background: var(--or-vieilli);
+            color: var(--gris-anthracite);
+            border-color: var(--jaune-pale);
+        }
+
+        /* ===== GRILLE 2 COLONNES ===== */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        /* ===== FICHE JOUEUR GAUCHE ===== */
+        .player-card {
+            background: var(--gris-anthracite);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--or-vieilli);
+            border-radius: 24px;
+            padding: 1.5rem;
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+        }
+
+        .player-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--or-vieilli);
+            padding-bottom: 1rem;
+        }
+
+        .player-avatar {
+            width: 60px;
+            height: 60px;
+            background: var(--or-vieilli);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 900;
+            border: 2px solid var(--blanc-pur);
+        }
+
+        .player-info h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            color: var(--blanc-pur);
+        }
+
+        .player-info .famille {
+            color: var(--jaune-pale);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 0.2rem;
+        }
+
+        .player-info .role-palier {
+            color: var(--cyan-brume);
+            font-size: 0.8rem;
+            margin-top: 0.1rem;
+        }
+
+        /* VILLE ACTUELLE EN DORÉ */
+        .player-info .ville-actuelle {
+            color: var(--or-vieilli);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 0.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            background: var(--bleu-nuit);
+            padding: 0.5rem 0.8rem;
+            border-radius: 8px;
+            margin-bottom: 0.3rem;
+            border-left: 3px solid var(--or-vieilli);
+            font-size: 0.9rem;
+        }
+
+        .stat-value {
+            color: var(--jaune-pale);
+            font-weight: 600;
+        }
+
+        .section-title {
+            color: var(--or-vieilli);
+            font-family: 'Cinzel';
+            font-size: 1rem;
+            margin: 1rem 0 0.5rem;
+            border-bottom: 1px solid var(--or-vieilli);
+            padding-bottom: 0.2rem;
+        }
+
+        .ressource-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.3rem 0;
+            font-size: 0.85rem;
+            border-bottom: 1px solid var(--cyan-brume);
+        }
+
+        .ressource-item .value {
+            color: var(--jaune-pale);
+            font-weight: 600;
+        }
+
+        .ressource-item .label {
+            color: var(--cyan-brume);
+        }
+
+        /* ===== ZONE DE RECRUTEMENT ===== */
+        .recruit-card {
+            background: var(--gris-anthracite);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--or-vieilli);
+            border-radius: 24px;
+            padding: 1.5rem;
+        }
+
+        .recruit-title {
+            font-family: 'Cinzel';
+            font-size: 1.8rem;
+            color: var(--jaune-pale);
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--or-vieilli);
+            padding-bottom: 0.5rem;
+        }
+
+        /* ===== BONUS SÉPARÉS AVEC POURCENTAGES EN BLANC ===== */
+        .bonus-container {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .bonus-item {
+            flex: 1;
+            min-width: 200px;
+            background: var(--bleu-nuit);
+            border: 1px solid var(--or-vieilli);
+            border-radius: 20px;
+            padding: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bonus-item.paris::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://i.postimg.cc/SNzf5NRg/Gemini-Generated-Image-k65o7ok65o7ok65o.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.4;
+            z-index: 0;
+        }
+
+        .bonus-item.famiglia::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://i.postimg.cc/cJ1DVyV6/Ultra-realistic-cinematic-poster-of-1920s-mafia-city-street-at-night-vintage-gangster-atmosphere-d.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.4;
+            z-index: 0;
+        }
+
+        .bonus-item > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .bonus-title {
+            font-family: 'Cinzel';
+            font-size: 1.1rem;
+            color: var(--jaune-pale);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .bonus-title i {
+            color: var(--or-vieilli);
+        }
+
+        .bonus-details {
+            color: var(--cyan-brume);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .bonus-details span {
+            color: var(--blanc-pur);
+            font-weight: 600;
+        }
+
+        /* ===== RECRUTEMENT GROUPÉ AVEC IMAGE ===== */
+        .bulk-recruit {
+            margin-bottom: 2rem;
+            background: var(--bleu-nuit);
+            border: 2px solid var(--or-vieilli);
+            border-radius: 20px;
+            padding: 1.2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bulk-recruit::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://i.postimg.cc/T2jDWLKs/Gemini-Generated-Image-c3vxmzc3vxmzc3vx.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.4;
+            z-index: 0;
+        }
+
+        .bulk-recruit > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .bulk-recruit-title {
+            font-family: 'Cinzel';
+            font-size: 1.3rem;
+            color: var(--jaune-pale);
+            margin-bottom: 0.8rem;
+        }
+
+        .bulk-recruit-btn {
+            background: linear-gradient(145deg, var(--or-vieilli), #8B6B3C);
+            border: 2px solid var(--jaune-pale);
+            color: var(--gris-anthracite);
+            font-family: 'Cinzel';
+            font-weight: 900;
+            font-size: 1.3rem;
+            padding: 0.8rem 1.5rem;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .bulk-recruit-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(195, 154, 91, 0.5);
+            background: var(--jaune-pale);
+        }
+
+        .bulk-preview {
+            margin-top: 0.8rem;
+            color: var(--cyan-brume);
+            font-size: 0.9rem;
+        }
+
+        .bulk-preview span {
+            color: var(--jaune-pale);
+            font-weight: 600;
+        }
+
+        /* ===== GRILLE DE RECRUTEMENT ===== */
+        .recruit-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .recruit-category {
+            background: transparent;
+            border-radius: 20px;
+            padding: 0;
+        }
+
+        .category-name {
+            font-family: 'Cinzel';
+            font-size: 1.3rem;
+            color: var(--jaune-pale);
+            margin-bottom: 1.2rem;
+            border-bottom: 1px solid var(--or-vieilli);
+            padding-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        /* CADRES INDIVIDUELS AVEC IMAGES DE FOND */
+        .recruit-card-item {
+            background: var(--bleu-nuit);
+            border: 2px solid var(--or-vieilli);
+            border-radius: 20px;
+            padding: 1.2rem;
+            margin-bottom: 1.2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .recruit-card-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(195, 154, 91, 0.2);
+            border-color: var(--jaune-pale);
+        }
+
+        .recruit-card-item.gardes::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://i.postimg.cc/CM9jjT7d/Gemini-Generated-Image-t128zdt128zdt128.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.4;
+            z-index: 0;
+        }
+
+        .recruit-card-item.gangsters::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://i.postimg.cc/TYGP8tYk/Gemini-Generated-Image-lpjbbylpjbbylpjb.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.4;
+            z-index: 0;
+        }
+
+        .recruit-card-item.tueurs::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://i.postimg.cc/W15zw0V7/Gemini-Generated-Image-t5sn1ft5sn1ft5sn.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.4;
+            z-index: 0;
+        }
+
+        .recruit-card-item.braqueurs::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://i.postimg.cc/BvDWnGmB/braqueures.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.4;
+            z-index: 0;
+        }
+
+        .recruit-card-item.tricheurs::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://i.postimg.cc/rsg22CQP/tricheurs.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.4;
+            z-index: 0;
+        }
+
+        .recruit-card-item.faussaires::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://i.postimg.cc/9Xb6MbY4/faussaires.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.4;
+            z-index: 0;
+        }
+
+        .recruit-card-item > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(195, 154, 91, 0.3);
+            padding-bottom: 0.8rem;
+        }
+
+        .card-title {
+            font-family: 'Cinzel';
+            font-size: 1.3rem;
+            color: var(--blanc-pur);
+        }
+
+        .card-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+            color: var(--cyan-brume);
+            font-size: 0.9rem;
+        }
+
+        .card-stats span {
+            color: var(--jaune-pale);
+            font-weight: 600;
+        }
+
+        .card-cost {
+            background: var(--gris-anthracite);
+            border-radius: 50px;
+            padding: 0.4rem 1rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            border: 1px solid var(--or-vieilli);
+        }
+
+        .card-cost .diamonds {
+            color: var(--jaune-pale);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .card-control {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            flex: 1;
+        }
+
+        .quantity-btn {
+            background: var(--gris-anthracite);
+            border: 1px solid var(--or-vieilli);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+
+        .recruit-card-item.gardes .quantity-btn,
+        .recruit-card-item.gangsters .quantity-btn,
+        .recruit-card-item.tueurs .quantity-btn {
+            color: var(--couleur-hommes);
+        }
+
+        .recruit-card-item.braqueurs .quantity-btn,
+        .recruit-card-item.tricheurs .quantity-btn,
+        .recruit-card-item.faussaires .quantity-btn {
+            color: var(--couleur-travailleurs);
+        }
+
+        .quantity-btn:hover {
+            background: var(--or-vieilli);
+            color: var(--gris-anthracite);
+        }
+
+        .quantity-input {
+            width: 70px;
+            background: var(--gris-anthracite);
+            border: 1px solid var(--or-vieilli);
+            border-radius: 50px;
+            padding: 0.5rem;
+            color: white;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .recruit-btn {
+            border: 2px solid var(--jaune-pale);
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            min-width: 110px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.2s;
+        }
+
+        .recruit-card-item.gardes .recruit-btn,
+        .recruit-card-item.gangsters .recruit-btn,
+        .recruit-card-item.tueurs .recruit-btn {
+            background: var(--couleur-hommes);
+            color: var(--gris-anthracite);
+        }
+
+        .recruit-card-item.braqueurs .recruit-btn,
+        .recruit-card-item.tricheurs .recruit-btn,
+        .recruit-card-item.faussaires .recruit-btn {
+            background: var(--couleur-travailleurs);
+            color: white;
+        }
+
+        .recruit-btn:hover {
+            background: var(--jaune-pale);
+            transform: scale(1.05);
+        }
+
+        .recruit-btn:disabled {
+            background: var(--cyan-brume);
+            border-color: var(--cyan-brume);
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        .error-message {
+            color: var(--erreur-rouge);
+            font-size: 0.75rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        /* ===== BARRE SOCIALE ===== */
+        .social-bar {
+            margin-top: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            background: var(--gris-anthracite);
+            backdrop-filter: blur(8px);
+            border-radius: 50px;
+            padding: 0.8rem 1.5rem;
+            border: 1px solid var(--or-vieilli);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            background: transparent;
+            border: 2px solid var(--or-vieilli);
+            border-radius: 50px;
+            padding: 0.4rem 1rem;
+            color: var(--blanc-pur);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: 0.2s;
+        }
+
+        .social-link:hover {
+            background: var(--or-vieilli);
+            color: var(--gris-anthracite);
+        }
+
+        .parrainage-box {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--bleu-nuit);
+            border-radius: 50px;
+            padding: 0.3rem 1rem;
+        }
+
+        .parrainage-box span {
+            color: var(--jaune-pale);
+            font-weight: 600;
+        }
+
+        .parrainage-btn {
+            background: var(--rouge-sang);
+            border: none;
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid var(--or-vieilli);
+        }
+
+        .parrainage-btn:hover {
+            background: #8b1a1a;
+        }
+
+        /* ===== POPUP AVEC IMAGE DE FOND ===== */
+        .action-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(21, 34, 38, 0.9);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+            font-family: 'Cinzel', serif;
+        }
+
+        .action-popup.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .popup-content {
+            background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+            border: 3px solid var(--or-vieilli);
+            border-radius: 30px;
+            padding: 2rem;
+            max-width: 450px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 0 50px rgba(195, 154, 91, 0.3);
+            transform: scale(0.7);
+            transition: transform 0.4s ease;
+            overflow: hidden;
+        }
+
+        .popup-content::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://i.postimg.cc/yxv1VzvG/Ultra-realistic-cinematic-poster-of-1920s-mafia-city-street-at-night-vintage-gangster-atmosphere-d.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.4;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .action-popup.show .popup-content {
+            transform: scale(1);
+        }
+
+        .popup-content > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .popup-close-x {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.8rem;
+            color: var(--cyan-brume);
+            cursor: pointer;
+            transition: 0.3s;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--bleu-nuit);
+            border: 1px solid var(--or-vieilli);
+            z-index: 10;
+        }
+
+        .popup-close-x:hover {
+            color: var(--jaune-pale);
+            transform: scale(1.1);
+            border-color: var(--jaune-pale);
+        }
+
+        .popup-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .popup-header h3 {
+            font-size: 1.8rem;
+            color: var(--jaune-pale);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px rgba(195, 154, 91, 0.5);
+        }
+
+        .popup-header .subtitle {
+            color: var(--cyan-brume);
+            font-size: 0.8rem;
+            margin-top: 0.3rem;
+        }
+
+        .popup-divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--or-vieilli), var(--rouge-sang), var(--or-vieilli), transparent);
+            margin: 1rem 0;
+        }
+
+        .popup-icon {
+            font-size: 3rem;
+            text-align: center;
+            margin: 0.5rem 0;
+        }
+
+        .popup-message {
+            text-align: center;
+            font-size: 1.1rem;
+            margin: 1rem 0;
+            color: var(--blanc-pur);
+        }
+
+        .popup-details {
+            background: var(--bleu-nuit);
+            border: 1px solid var(--or-vieilli);
+            border-radius: 15px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.3rem 0;
+            border-bottom: 1px solid var(--cyan-brume);
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            color: var(--cyan-brume);
+        }
+
+        .detail-value {
+            color: var(--jaune-pale);
+            font-weight: 600;
+        }
+
+        .popup-footer {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .popup-confirm, .popup-cancel {
+            background: transparent;
+            border: 2px solid var(--or-vieilli);
+            color: var(--jaune-pale);
+            font-family: 'Cinzel';
+            font-size: 1rem;
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            flex: 1;
+        }
+
+        .popup-confirm:hover {
+            background: var(--or-vieilli);
+            color: var(--gris-anthracite);
+        }
+
+        .popup-cancel {
+            border-color: var(--rouge-sang);
+            color: var(--rouge-sang);
+        }
+
+        .popup-cancel:hover {
+            background: var(--rouge-sang);
+            color: var(--gris-anthracite);
+        }
+
+        .popup-decoration {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 1px solid rgba(195, 154, 91, 0.2);
+            border-radius: 20px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .popup-decoration::before {
+            content: "⚜️";
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            font-size: 2rem;
+            transform: rotate(-15deg);
+            opacity: 0.3;
+        }
+
+        .popup-decoration::after {
+            content: "⚜️";
+            position: absolute;
+            bottom: -15px;
+            right: -15px;
+            font-size: 2rem;
+            transform: rotate(15deg);
+            opacity: 0.3;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            .player-card {
+                position: static;
+            }
+            .recruit-columns {
+                grid-template-columns: 1fr;
+            }
+            .bonus-container {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .top-bar, .social-bar {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .right-controls {
+                width: 100%;
+                justify-content: center;
+            }
+            .card-control {
+                flex-direction: column;
+            }
+            .quantity-control {
+                width: 100%;
+            }
+            .recruit-btn {
+                width: 100%;
+            }
+            .logo-small {
+                position: static;
+                transform: none;
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- AUDIO -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="audio/mafia-theme.mp3" type="audio/mpeg">
+        Votre navigateur ne supporte pas la balise audio.
+    </audio>
+
+    <!-- POPUP AVEC IMAGE DE FOND -->
+    <div class="action-popup" id="resultPopup">
+        <div class="popup-content">
+            <div class="popup-decoration"></div>
+            <div class="popup-close-x" onclick="cancelAndClose()">✕</div>
+            <div class="popup-header">
+                <h3 id="popupTitle">RECRUTEMENT</h3>
+                <div class="subtitle" id="popupSubtitle">La Famiglia s'agrandit</div>
+            </div>
+            <div class="popup-divider"></div>
+            <div class="popup-icon" id="popupIcon">⚜️</div>
+            <div class="popup-message" id="popupMessage">Opération réussie !</div>
+            <div class="popup-details" id="popupDetails"></div>
+            <div class="popup-footer">
+                <button class="popup-confirm" onclick="confirmAndClose()">CONFIRMER</button>
+                <button class="popup-cancel" onclick="cancelAndClose()">ANNULER</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- TOP BAR AVEC LOGO CENTRÉ -->
+        <div class="top-bar">
+            <div class="logo-small">
+                <div class="logo-small-img">
+                    <img src="https://i.postimg.cc/VkPh6787/Gemini-Generated-Image-gkkohwgkkohwgkko.png" alt="Mafia Famiglia Logo">
+                </div>
+                <div class="logo-small-text">
+                    MAFIA <span class="family">FAMIGLIA</span>
+                </div>
+            </div>
+            <div class="right-controls">
+                <button class="music-btn" id="playMusicBtn" title="Activer/Désactiver la musique">
+                    <i class="fas fa-play"></i>
+                </button>
+                <div class="lang-switch">
+                    <button class="lang-btn active" onclick="setLang('fr')">
+                        <img src="https://flagcdn.com/w20/fr.png" alt="FR"> FR
+                    </button>
+                    <button class="lang-btn" onclick="setLang('en')">
+                        <img src="https://flagcdn.com/w20/gb.png" alt="EN"> EN
+                    </button>
+                    <button class="lang-btn" onclick="setLang('ger')">
+                        <img src="https://flagcdn.com/w20/de.png" alt="GER"> GER
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MENU -->
+        <div class="menu-grid">
+            <a href="regles.html" class="menu-item" data-i18n="menu_regles">RÈGLES</a>
+            <a href="recrutement.html" class="menu-item active" data-i18n="menu_recrutement">RECRUTEMENT</a>
+            <a href="production.html" class="menu-item" data-i18n="menu_production">PRODUCTION</a>
+            <a href="villes.html" class="menu-item" data-i18n="menu_villes">VILLES</a>
+            <a href="famille.html" class="menu-item" data-i18n="menu_famille">FAMILLE</a>
+            <a href="classement.html" class="menu-item" data-i18n="menu_podium">PODIUM</a>
+            <a href="profil.html" class="menu-item" data-i18n="menu_profil">PROFIL</a>
+            <a href="banque.html" class="menu-item" data-i18n="menu_banque">BANQUE</a>
+        </div>
+
+        <!-- GRILLE PRINCIPALE -->
+        <div class="dashboard-grid">
+            <!-- FICHE JOUEUR GAUCHE -->
+            <div class="player-card">
+                <div class="player-header">
+                    <div class="player-avatar">VL</div>
+                    <div class="player-info">
+                        <h3>VitoLuciano</h3>
+                        <div class="famille">Famiglia Noctera</div>
+                        <div class="role-palier">Capo • P2</div>
+                        <!-- VILLE ACTUELLE EN DORÉ -->
+                        <div class="ville-actuelle" id="villeActuelle">📍 Paris</div>
+                    </div>
+                </div>
+
+                <div class="stat-row">
+                    <span>💰 Argent</span>
+                    <span class="stat-value" id="playerMoney">1 245 000 $</span>
+                </div>
+                <div class="stat-row">
+                    <span>💎 Diamonds</span>
+                    <span class="stat-value" id="playerDiamonds">3 500</span>
+                </div>
+                <div class="stat-row">
+                    <span>💎 VIP</span>
+                    <span class="stat-value" id="playerVip">1 200</span>
+                </div>
+
+                <div class="section-title">ARMES & ARMURES</div>
+                <div class="ressource-item"><span class="label">9mm</span> <span class="value" id="stock9mm">1 000</span></div>
+                <div class="ressource-item"><span class="label">AK47</span> <span class="value" id="stockAK47">540</span></div>
+                <div class="ressource-item"><span class="label">Thompson T1</span> <span class="value" id="stockThompson">820</span></div>
+                <div class="ressource-item"><span class="label">Gilets pare-balles</span> <span class="value" id="stockGiletsSimples">980</span></div>
+                <div class="ressource-item"><span class="label">Gilets renforcés</span> <span class="value" id="stockGiletsRenforces">420</span></div>
+
+                <div class="section-title">HOMMES</div>
+                <div class="ressource-item"><span class="label">Garde du corps</span> <span class="value" id="stockGardes">2 500</span></div>
+                <div class="ressource-item"><span class="label">Gangsters</span> <span class="value" id="stockGangsters">3 200</span></div>
+                <div class="ressource-item"><span class="label">Tueurs</span> <span class="value" id="stockTueurs">1 800</span></div>
+
+                <div class="section-title">TRAVAILLEURS</div>
+                <div class="ressource-item"><span class="label">Braqueurs</span> <span class="value" id="stockBraqueurs">890</span></div>
+                <div class="ressource-item"><span class="label">Tricheurs</span> <span class="value" id="stockTricheurs">450</span></div>
+                <div class="ressource-item"><span class="label">Faussaires</span> <span class="value" id="stockFaussaires">380</span></div>
+
+                <div class="section-title">RESSOURCES</div>
+                <div class="ressource-item"><span class="label">Vans</span> <span class="value" id="stockVans">24</span></div>
+                <div class="ressource-item"><span class="label">Tabac</span> <span class="value" id="stockTabac">1 200</span></div>
+                <div class="ressource-item"><span class="label">Alcool</span> <span class="value" id="stockAlcool">950</span></div>
+                
+                <div class="stat-row" style="margin-top: 1rem;">
+                    <span>Revenu horaire</span>
+                    <span class="stat-value" id="revenuHoraire">+ 172 000 $</span>
+                </div>
+            </div>
+
+            <!-- ZONE DE RECRUTEMENT DROITE -->
+            <div class="recruit-card">
+                <h2 class="recruit-title">RECRUTEMENT</h2>
+
+                <!-- BONUS SÉPARÉS AVEC POURCENTAGES EN BLANC -->
+                <div class="bonus-container">
+                    <div class="bonus-item paris">
+                        <div class="bonus-title">
+                            <i class="fas fa-city"></i> Bonus Paris
+                        </div>
+                        <div class="bonus-details">
+                            • <span>Garde du corps</span> : <span class="percent">+5%</span><br>
+                            • <span>Faussaires</span> : <span class="percent">+10%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="bonus-item famiglia">
+                        <div class="bonus-title">
+                            <i class="fas fa-crown"></i> Bonus Famiglia Noctera
+                        </div>
+                        <div class="bonus-details">
+                            • <span>Tueurs à gage</span> : <span class="percent">+10%</span><br>
+                            • <span>Faussaires</span> : <span class="percent">+10%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RECRUTEMENT GROUPÉ -->
+                <div class="bulk-recruit">
+                    <div class="bulk-recruit-title">⚡ RECRUTEMENT D'ÉLITE ⚡</div>
+                    <button class="bulk-recruit-btn" onclick="prepareBulkRecruit()">
+                        1000 💎
+                    </button>
+                    <div class="bulk-preview" id="bulkPreview">
+                        <span id="bulkGardesPreview">750</span> Gardes · 
+                        <span id="bulkGangstersPreview">600</span> Gangsters · 
+                        <span id="bulkTueursPreview">370</span> Tueurs · 
+                        <span id="bulkBraqueursPreview">500</span> Braqueurs · 
+                        <span id="bulkTricheursPreview">530</span> Tricheurs · 
+                        <span id="bulkFaussairesPreview">420</span> Faussaires
+                    </div>
+                </div>
+
+                <div class="recruit-columns">
+                    <!-- COLONNE HOMMES -->
+                    <div class="recruit-category">
+                        <div class="category-name">HOMMES</div>
+
+                        <!-- Gardes -->
+                        <div class="recruit-card-item gardes">
+                            <div class="card-header">
+                                <span class="card-title">Garde du corps</span>
+                            </div>
+                            <div class="card-stats">
+                                <span>Stock:</span> <span id="stockGardesCard">2 500</span>
+                            </div>
+                            <div class="card-cost">
+                                Coût: <span class="diamonds">20 💎</span> (13 unités)
+                            </div>
+                            <div class="card-control">
+                                <div class="quantity-control">
+                                    <button class="quantity-btn" onclick="changeQty('gardes', -1)">-</button>
+                                    <input type="number" id="qty-gardes" class="quantity-input" value="1" min="1">
+                                    <button class="quantity-btn" onclick="changeQty('gardes', 1)">+</button>
+                                </div>
+                                <button class="recruit-btn" onclick="prepareRecruit('gardes')">RECRUTER</button>
+                            </div>
+                            <div class="error-message" id="error-gardes"></div>
+                        </div>
+
+                        <!-- Gangsters -->
+                        <div class="recruit-card-item gangsters">
+                            <div class="card-header">
+                                <span class="card-title">Gangsters</span>
+                            </div>
+                            <div class="card-stats">
+                                <span>Stock:</span> <span id="stockGangstersCard">3 200</span>
+                            </div>
+                            <div class="card-cost">
+                                Coût: <span class="diamonds">25 💎</span> (16 unités)
+                            </div>
+                            <div class="card-control">
+                                <div class="quantity-control">
+                                    <button class="quantity-btn" onclick="changeQty('gangsters', -1)">-</button>
+                                    <input type="number" id="qty-gangsters" class="quantity-input" value="1" min="1">
+                                    <button class="quantity-btn" onclick="changeQty('gangsters', 1)">+</button>
+                                </div>
+                                <button class="recruit-btn" onclick="prepareRecruit('gangsters')">RECRUTER</button>
+                            </div>
+                            <div class="error-message" id="error-gangsters"></div>
+                        </div>
+
+                        <!-- Tueurs -->
+                        <div class="recruit-card-item tueurs">
+                            <div class="card-header">
+                                <span class="card-title">Tueurs à gage</span>
+                            </div>
+                            <div class="card-stats">
+                                <span>Stock:</span> <span id="stockTueursCard">1 800</span>
+                            </div>
+                            <div class="card-cost">
+                                Coût: <span class="diamonds">40 💎</span> (26 unités)
+                            </div>
+                            <div class="card-control">
+                                <div class="quantity-control">
+                                    <button class="quantity-btn" onclick="changeQty('tueurs', -1)">-</button>
+                                    <input type="number" id="qty-tueurs" class="quantity-input" value="1" min="1">
+                                    <button class="quantity-btn" onclick="changeQty('tueurs', 1)">+</button>
+                                </div>
+                                <button class="recruit-btn" onclick="prepareRecruit('tueurs')">RECRUTER</button>
+                            </div>
+                            <div class="error-message" id="error-tueurs"></div>
+                        </div>
+                    </div>
+
+                    <!-- COLONNE TRAVAILLEURS -->
+                    <div class="recruit-category">
+                        <div class="category-name">TRAVAILLEURS</div>
+
+                        <!-- Braqueurs -->
+                        <div class="recruit-card-item braqueurs">
+                            <div class="card-header">
+                                <span class="card-title">Braqueurs</span>
+                            </div>
+                            <div class="card-stats">
+                                <span>Stock:</span> <span id="stockBraqueursCard">890</span>
+                            </div>
+                            <div class="card-cost">
+                                Coût: <span class="diamonds">30 💎</span> (19 unités)
+                            </div>
+                            <div class="card-control">
+                                <div class="quantity-control">
+                                    <button class="quantity-btn" onclick="changeQty('braqueurs', -1)">-</button>
+                                    <input type="number" id="qty-braqueurs" class="quantity-input" value="1" min="1">
+                                    <button class="quantity-btn" onclick="changeQty('braqueurs', 1)">+</button>
+                                </div>
+                                <button class="recruit-btn" onclick="prepareRecruit('braqueurs')">RECRUTER</button>
+                            </div>
+                            <div class="error-message" id="error-braqueurs"></div>
+                        </div>
+
+                        <!-- Tricheurs -->
+                        <div class="recruit-card-item tricheurs">
+                            <div class="card-header">
+                                <span class="card-title">Tricheurs</span>
+                            </div>
+                            <div class="card-stats">
+                                <span>Stock:</span> <span id="stockTricheursCard">450</span>
+                            </div>
+                            <div class="card-cost">
+                                Coût: <span class="diamonds">28 💎</span> (18 unités)
+                            </div>
+                            <div class="card-control">
+                                <div class="quantity-control">
+                                    <button class="quantity-btn" onclick="changeQty('tricheurs', -1)">-</button>
+                                    <input type="number" id="qty-tricheurs" class="quantity-input" value="1" min="1">
+                                    <button class="quantity-btn" onclick="changeQty('tricheurs', 1)">+</button>
+                                </div>
+                                <button class="recruit-btn" onclick="prepareRecruit('tricheurs')">RECRUTER</button>
+                            </div>
+                            <div class="error-message" id="error-tricheurs"></div>
+                        </div>
+
+                        <!-- Faussaires -->
+                        <div class="recruit-card-item faussaires">
+                            <div class="card-header">
+                                <span class="card-title">Faussaires</span>
+                            </div>
+                            <div class="card-stats">
+                                <span>Stock:</span> <span id="stockFaussairesCard">380</span>
+                            </div>
+                            <div class="card-cost">
+                                Coût: <span class="diamonds">35 💎</span> (22 unités)
+                            </div>
+                            <div class="card-control">
+                                <div class="quantity-control">
+                                    <button class="quantity-btn" onclick="changeQty('faussaires', -1)">-</button>
+                                    <input type="number" id="qty-faussaires" class="quantity-input" value="1" min="1">
+                                    <button class="quantity-btn" onclick="changeQty('faussaires', 1)">+</button>
+                                </div>
+                                <button class="recruit-btn" onclick="prepareRecruit('faussaires')">RECRUTER</button>
+                            </div>
+                            <div class="error-message" id="error-faussaires"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BARRE SOCIALE -->
+        <div class="social-bar">
+            <div class="social-links">
+                <a href="#" class="social-link" onclick="alert('Rejoignez notre Discord !')">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/discord.svg" alt="Discord" width="20" height="20" style="filter: invert(1);"> Discord
+                </a>
+                <a href="#" class="social-link" onclick="alert('Suivez-nous sur Facebook !')">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/facebook.svg" alt="Facebook" width="20" height="20" style="filter: invert(1);"> Facebook
+                </a>
+                <a href="#" class="social-link" onclick="alert('Rejoignez notre Instagram !')">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg" alt="Instagram" width="20" height="20" style="filter: invert(1);"> Instagram
+                </a>
+            </div>
+            <div class="parrainage-box">
+                <span>🎁 Parrainage</span>
+                <span>Invite un ami → 500 💎 + 1M$</span>
+                <button class="parrainage-btn" onclick="alert('Lien de parrainage copié !')">INVITER</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ===== GESTIONNAIRE AUDIO =====
+        const audio = document.getElementById('bgMusic');
+        const playBtn = document.getElementById('playMusicBtn');
+        let isPlaying = false;
+        
+        audio.volume = 0.2;
+        
+        window.addEventListener('load', function() {
+            audio.play().then(() => {
+                isPlaying = true;
+                playBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+                playBtn.classList.add('playing');
+            }).catch(error => {
+                playBtn.innerHTML = '<i class="fas fa-play"></i>';
+            });
+        });
+        
+        playBtn.addEventListener('click', function() {
+            if (isPlaying) {
+                audio.pause();
+                playBtn.innerHTML = '<i class="fas fa-play"></i>';
+                playBtn.classList.remove('playing');
+                isPlaying = false;
+            } else {
+                audio.play();
+                playBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+                playBtn.classList.add('playing');
+                isPlaying = true;
+            }
+        });
+
+        // ===== TIMERS =====
+        function updateTimers() {
+            const now = new Date();
+            const roundEnd = new Date(now);
+            roundEnd.setDate(roundEnd.getDate() + 13);
+            roundEnd.setHours(2, 18, 0);
+            const diffRound = roundEnd - now;
+            if (diffRound > 0) {
+                const d = Math.floor(diffRound / (1000 * 60 * 60 * 24));
+                const h = Math.floor((diffRound % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((diffRound % (1000 * 60 * 60)) / (1000 * 60));
+                document.getElementById('roundTimer').textContent = `${d}j ${h}h ${m}m`;
+            }
+        }
+        setInterval(updateTimers, 60000);
+
+        // ===== GESTION DES VILLES =====
+        const villes = ['Paris', 'New York', 'Las Vegas', 'Sicile'];
+        let indexVille = 0;
+        let currentCity = villes[0];
+        
+        function changerVille() {
+            indexVille = (indexVille + 1) % villes.length;
+            currentCity = villes[indexVille];
+            document.getElementById('villeActuelle').textContent = `📍 ${currentCity}`;
+            
+            // Mise à jour des bonus en fonction de la ville
+            updateBonusDisplay();
+        }
+        
+        function updateBonusDisplay() {
+            // Cette fonction pourrait être étendue pour modifier les bonus selon la ville
+            console.log(`Ville changée : ${currentCity}`);
+        }
+        
+        // Changement automatique toutes les 5 secondes (pour la démo)
+        setInterval(changerVille, 5000);
+
+        // ===== DONNÉES DU JOUEUR =====
+        let diamonds = 3500;
+        const stocks = {
+            gardes: 2500,
+            gangsters: 3200,
+            tueurs: 1800,
+            braqueurs: 890,
+            tricheurs: 450,
+            faussaires: 380
+        };
+
+        const costs = {
+            gardes: 20,
+            gangsters: 25,
+            tueurs: 40,
+            braqueurs: 30,
+            tricheurs: 28,
+            faussaires: 35
+        };
+
+        const RECRUIT_BOOST = 1.3;
+
+        const bulkDistribution = {
+            gardes: 75,
+            gangsters: 60,
+            tueurs: 37,
+            braqueurs: 50,
+            tricheurs: 53,
+            faussaires: 42
+        };
+
+        let pendingTransaction = null;
+
+        // ===== FONCTIONS =====
+        function changeQty(unit, delta) {
+            const input = document.getElementById(`qty-${unit}`);
+            let val = parseInt(input.value) || 1;
+            val += delta;
+            if (val < 1) val = 1;
+            input.value = val;
+        }
+
+        function prepareRecruit(unit) {
+            const input = document.getElementById(`qty-${unit}`);
+            const qty = parseInt(input.value) || 1;
+            const cost = costs[unit] * qty;
+            
+            if (diamonds < cost) {
+                document.getElementById(`error-${unit}`).style.display = 'block';
+                document.getElementById(`error-${unit}`).textContent = `❌ Pas assez de diamonds (besoin de ${cost})`;
+                setTimeout(() => {
+                    document.getElementById(`error-${unit}`).style.display = 'none';
+                }, 3000);
+                return;
+            }
+            
+            const baseUnits = qty * 10;
+            const unitsGained = Math.floor(baseUnits * RECRUIT_BOOST);
+            
+            let bonusDetails = '+30% base';
+            
+            pendingTransaction = {
+                type: 'recruit',
+                unit: unit,
+                qty: qty,
+                cost: cost,
+                unitsGained: unitsGained
+            };
+            
+            showPopup(
+                'RECRUTEMENT',
+                'La Famiglia s\'agrandit',
+                '⚜️',
+                `Recrutement de ${getUnitName(unit)}`,
+                {
+                    'Quantité': `${qty} diamonds`,
+                    'Coût': `${cost} 💎`,
+                    'Bonus': bonusDetails,
+                    'Nouveaux': `+${unitsGained} ${getUnitName(unit)}`,
+                    'Stock actuel': stocks[unit]
+                }
+            );
+        }
+
+        function getUnitName(unit) {
+            const names = {
+                gardes: 'Garde du corps',
+                gangsters: 'Gangsters',
+                tueurs: 'Tueurs à gage',
+                braqueurs: 'Braqueurs',
+                tricheurs: 'Tricheurs',
+                faussaires: 'Faussaires'
+            };
+            return names[unit] || unit;
+        }
+
+        function prepareBulkRecruit() {
+            const cost = 1000;
+            
+            if (diamonds < cost) {
+                alert(`❌ Pas assez de diamonds (besoin de ${cost})`);
+                return;
+            }
+            
+            let gains = {};
+            let details = {};
+            let totalUnits = 0;
+            
+            for (let [unit, baseQty] of Object.entries(bulkDistribution)) {
+                const gained = baseQty * 10;
+                gains[unit] = gained;
+                details[getUnitName(unit)] = `+${gained}`;
+                totalUnits += gained;
+            }
+            
+            pendingTransaction = {
+                type: 'bulk',
+                cost: cost,
+                gains: gains
+            };
+            
+            showPopup(
+                'RECRUTEMENT ÉLITE',
+                'Pack 1000 diamonds',
+                '👑',
+                'Recrutement groupé',
+                {
+                    ...details,
+                    'Total': `${totalUnits} hommes`
+                }
+            );
+        }
+
+        function showPopup(title, subtitle, icon, message, details) {
+            const popup = document.getElementById('resultPopup');
+            document.getElementById('popupTitle').textContent = title;
+            document.getElementById('popupSubtitle').textContent = subtitle;
+            document.getElementById('popupIcon').textContent = icon;
+            document.getElementById('popupMessage').textContent = message;
+            
+            let detailsHtml = '';
+            for (let [key, value] of Object.entries(details)) {
+                detailsHtml += `<div class="detail-row"><span class="detail-label">${key}</span><span class="detail-value">${value}</span></div>`;
+            }
+            document.getElementById('popupDetails').innerHTML = detailsHtml;
+            
+            popup.classList.add('show');
+        }
+
+        function confirmAndClose() {
+            if (pendingTransaction) {
+                if (pendingTransaction.type === 'recruit') {
+                    diamonds -= pendingTransaction.cost;
+                    stocks[pendingTransaction.unit] += pendingTransaction.unitsGained;
+                } else if (pendingTransaction.type === 'bulk') {
+                    diamonds -= pendingTransaction.cost;
+                    for (let [unit, gained] of Object.entries(pendingTransaction.gains)) {
+                        stocks[unit] += gained;
+                    }
+                }
+                
+                updateDisplay();
+                pendingTransaction = null;
+            }
+            document.getElementById('resultPopup').classList.remove('show');
+        }
+
+        function cancelAndClose() {
+            pendingTransaction = null;
+            document.getElementById('resultPopup').classList.remove('show');
+        }
+
+        function updateDisplay() {
+            document.getElementById('playerDiamonds').textContent = diamonds.toLocaleString();
+            
+            for (let unit in stocks) {
+                const elId = `stock${unit.charAt(0).toUpperCase() + unit.slice(1)}`;
+                const el = document.getElementById(elId);
+                if (el) el.textContent = stocks[unit].toLocaleString();
+                
+                const cardEl = document.getElementById(`stock${unit.charAt(0).toUpperCase() + unit.slice(1)}Card`);
+                if (cardEl) cardEl.textContent = stocks[unit].toLocaleString();
+            }
+            
+            for (let [unit, baseQty] of Object.entries(bulkDistribution)) {
+                const previewEl = document.getElementById(`bulk${unit.charAt(0).toUpperCase() + unit.slice(1)}Preview`);
+                if (previewEl) previewEl.textContent = (baseQty * 10).toLocaleString();
+            }
+        }
+
+        let currentFamily = 'Noctera';
+
+        // ===== TRADUCTIONS =====
+        const translations = {
+            fr: {
+                menu_regles: "RÈGLES",
+                menu_recrutement: "RECRUTEMENT",
+                menu_production: "PRODUCTION",
+                menu_villes: "VILLES",
+                menu_famille: "FAMILLE",
+                menu_podium: "PODIUM",
+                menu_profil: "PROFIL",
+                menu_banque: "BANQUE"
+            },
+            en: {
+                menu_regles: "RULES",
+                menu_recrutement: "RECRUITMENT",
+                menu_production: "PRODUCTION",
+                menu_villes: "CITIES",
+                menu_famille: "FAMILY",
+                menu_podium: "PODIUM",
+                menu_profil: "PROFILE",
+                menu_banque: "BANK"
+            },
+            ger: {
+                menu_regles: "REGELN",
+                menu_recrutement: "REKRUTIERUNG",
+                menu_production: "PRODUKTION",
+                menu_villes: "STÄDTE",
+                menu_famille: "FAMILIE",
+                menu_podium: "PODIUM",
+                menu_profil: "PROFIL",
+                menu_banque: "BANK"
+            }
+        };
+
+        let currentLang = 'fr';
+
+        function setLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.includes(lang.toUpperCase())) {
+                    btn.classList.add('active');
+                }
+            });
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+        }
+        setLang('fr');
+
+        // Initialisation
+        updateDisplay();
+    </script>
+</body>
+</html>
